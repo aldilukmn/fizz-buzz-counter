@@ -1,17 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import FizzBuzzCounterApp from "./components/FizzBuzzCounterApp";
+import "./style/style.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+class CounterApp extends React.Component {
+  constructor(props) {
+    super(props);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    this.state = {
+      count: 0,
+    };
+    this.onIncreaseEventHandler = this.onIncreaseEventHandler.bind(this);
+    this.onDecreaseEventHandler = this.onDecreaseEventHandler.bind(this);
+    this.onResetEventHandler = this.onResetEventHandler.bind(this);
+  }
+
+  onIncreaseEventHandler() {
+    this.setState((nextState) => {
+      return {
+        count: nextState.count + 1,
+      };
+    });
+  }
+
+  onDecreaseEventHandler() {
+    this.setState((previousState) => {
+      return {
+        count: previousState.count - 1,
+      };
+    });
+  }
+
+  onResetEventHandler() {
+    this.setState(() => {
+      return {
+        count: 0,
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <FizzBuzzCounterApp increase={this.onIncreaseEventHandler} decrease={this.onDecreaseEventHandler} count={this.state.count} reset={this.onResetEventHandler} />
+      </div>
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<CounterApp />);
