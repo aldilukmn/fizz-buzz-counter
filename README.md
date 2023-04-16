@@ -1,1 +1,3 @@
-FizzBuzz Counter App using class component / stateful
+FizzBuzz Counter App
+
+![Fizzbuzz Image](./public/img/ss.png)
